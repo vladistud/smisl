@@ -1,0 +1,45 @@
+#include <iostream>
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void push(Node*& top, int val) {
+    Node* newNode = new Node{val, top};
+    top = newNode;
+}
+
+int pop(Node*& top) {
+    if (!top) return -1;
+    Node* temp = top;
+    int value = temp->data;
+    top = top->next;
+    delete temp;
+    return value;
+}
+
+void printStack(Node* top) {
+    while (top) {
+        std::cout << top->data << " ";
+        top = top->next;
+    }
+    std::cout << "\n";
+}
+
+int main() {
+    Node* stack = nullptr;
+    push(stack, 1);
+    push(stack, 2);
+    push(stack, 3);
+    push(stack, 4);
+    printStack(stack);
+    
+    pop(stack);
+    printStack(stack);
+    
+    push(stack, 10);
+    printStack(stack);
+    
+    return 0;
+}
